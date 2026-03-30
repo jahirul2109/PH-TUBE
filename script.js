@@ -20,15 +20,15 @@ function loadCategoris() {
         })
 }
 
+// called in video details button and get id
 const videoDetailes = (video) => {
     const url = `https://openapi.programming-hero.com/api/phero-tube/video/${video}`
     fetch(url)
         .then(res => res.json())
         .then((data) => {
-            displayVideoDetails(data.video)
+            displayVideoDetails(data.video)  // called DisplayVideoDetails function and pass perameter
         })
         .catch((error) => {
-
             console.log(error)
         })
 }
@@ -36,7 +36,6 @@ const videoDetailes = (video) => {
 const displayVideoDetails = (data) => {
     const modalBtn = document.getElementById('my_modal').showModal();
     const detailesContainer = document.getElementById('detailsContainer');
-    console.log(data)
     detailesContainer.innerHTML = `
 <div class="card bg-base-100 image-full w-full shadow-sm">
   <figure>
@@ -59,6 +58,7 @@ const displayVideoDetails = (data) => {
     `
 }
 
+// function for get individual Category video
 function loadByCategori(id) {
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
         .then(res => res.json())
@@ -90,16 +90,18 @@ const loadVideos = () => {
     fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
         .then(res => res.json())
         .then((data) => {
-            removeActiveClass()
-            document.getElementById('btn-all').classList.add('active')
-            displayVideos(data.videos)
+            removeActiveClass() // removeclass funtiton call
+            document.getElementById('btn-all').classList.add('active') // active class add in defult button
+            displayVideos(data.videos) // Call display video function and send data 
         })
         .catch('pechana muje')
 }
 
 const displayVideos = (videos) => {
     const videoContainer = document.getElementById('videoscontainer');
-    videoContainer.innerHTML = '';
+    videoContainer.innerHTML = ''; // InnerHTML empty for When we reloaded defult value is empty
+
+    // Condition check if Videos length was Zero Then work then condition
     if (videos.length === 0) {
         videoContainer.innerHTML = `
                 <div id="empty" class="col-span-full flex flex-col justify-center items-center py-10">
@@ -110,8 +112,10 @@ const displayVideos = (videos) => {
         return;
     }
 
+    // Run loop for single array
     videos.forEach(video => {
         const videoCard = document.createElement('div');
+        // Get Video content 
         videoCard.innerHTML = `
     <div class="card  md:w-full  flex flex-col  w-11/12 h-[350px] mx-auto shadow-sm">
   <figure class="relative ">
@@ -135,6 +139,7 @@ const displayVideos = (videos) => {
   <button onclick ="videoDetailes('${video.video_id}')" class="btn btn-block">Video Detalis</button>
 </div>
     `;
+    // Append Videocard 
         videoContainer.appendChild(videoCard);
     });
 }
