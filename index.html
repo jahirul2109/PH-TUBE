@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PH-TUBE</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <style>
+        .active {
+            background-color: red;
+            color: white;
+        }
+    </style>
+    <header id="logo" class="w-11/12 flex justify-between py-5 mx-auto border-b-2  border-gray-300">
+        <div>
+            <!-- <a href="index.html" class=""> -->
+            <img class="w-[120px]" src="ph-tube/assets/Logo.png" alt="logo-png">
+            <!-- </a> -->
+        </div>
+        <div>
+            <button class="btn font-semibold">Sort by Views</button>
+        </div>
+        <div>
+            <button class="btn bg-[red] text-white font-semibold">Blogs</button>
+        </div>
+    </header>
+    <nav id="navbar" class="flex justify-center gap-5 py-8">
+        <div><button id="btn-all" onclick="loadVideos()" class="btn text-xl font-semibold">All</button></div>
+    </nav>
+
+    <!-- Video section  -->
+     <section id="videoscontainer" class="grid md:grid-cols-4 grid-cols-2 px-3  md:px-0 md:w-11/12 mx-auto gap-10">
+    </section>
+         <!-- Open the modal using ID.showModal() method -->
+         <!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
+         <dialog id="my_modal" class="modal">
+             <div class="modal-box">
+                <div id="detailsContainer">
+
+                </div>
+                 <div class="modal-action">
+                     <form method="dialog">
+                         <!-- if there is a button in form, it will close the modal -->
+                         <button class="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+    <script src="script.js"></script>
+</body>
+</html>
