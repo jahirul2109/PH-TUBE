@@ -78,7 +78,7 @@ function displayCategoris(categoris) {
         // create new element 
         const categorisBtn = document.createElement('div');
         categorisBtn.innerHTML = `
-        <button id="btn-${cat.category_id}" onclick= "loadByCategori(${cat.category_id})" class="btn text-xl  font-semibold">${cat.category}</button>
+        <button id="btn-${cat.category_id}" onclick= "loadByCategori(${cat.category_id})" class="btn md:text-xl text-xs  font-semibold">${cat.category}</button>
         `;
         // append new element 
         navbar.appendChild(categorisBtn);
@@ -113,9 +113,9 @@ const displayVideos = (videos) => {
     videos.forEach(video => {
         const videoCard = document.createElement('div');
         videoCard.innerHTML = `
-    <div class="card  md:w-72 md:max-h-full flex flex-col  w-56 max-h-72 mx-auto shadow-sm">
+    <div class="card  md:w-full  flex flex-col  w-11/12 h-[350px] mx-auto shadow-sm">
   <figure class="relative ">
-    <img class = ' md:w-[300px] md:h-[150px] w-[250px] h-[120px] object-cover '
+    <img class = ' md:w-[400px] w-full h-[300px] object-fill '
       src= ${video.thumbnail}
       alt="Shoes" />
       <span class="absolute right-2 bottom-2 bg-slate-900 text-white p-1 rounded text-sm">3hrs 56 min ago</span>
