@@ -99,15 +99,15 @@ function displayCategoris(categoris) {
     }
 }
 
-function loadVideos  (searchBox = "") {
+function loadVideos  (searchBox ="") {
     showLoader()
     // fetch api
-    const url = `https://openapi.programming-hero.com/api/phero-tube/videos?titile= ${searchBox}`;
+    const url = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchBox}`;
     console.log(url)
     fetch(url)
         .then(res => res.json())
         .then((data) => {
-            console.log(data)
+            console.log(data.videos)
             removeActiveClass() // removeclass funtiton call
             document.getElementById('btn-all').classList.add('active') // active class add in defult button
             displayVideos(data.videos) // Call display video function and send data 
@@ -169,5 +169,5 @@ const displayVideos = (videos) => {
         console.log(search)
         loadVideos(search)
     })
-
+loadVideos()
 loadCategoris()
