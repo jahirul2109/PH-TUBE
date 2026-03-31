@@ -1,3 +1,23 @@
+const searchBar = () => {
+    document.getElementById('searchBar').addEventListener('keyup', (e) => {
+        const type = e.target.value;
+        console.log(type)
+        loadVideos(type)
+    })
+}
+const showLoader = () => {
+    const loaderSpiner = document.getElementById('loaderBar');
+    const videoContainer = document.getElementById('videoscontainer');
+    loaderSpiner.classList.remove('hidden');
+    videoContainer.classList.add('hidden');
+}
+const hideLoader = () => {
+    const loaderSpiner = document.getElementById('loaderBar');
+    const videoContainer = document.getElementById('videoscontainer');
+    loaderSpiner.classList.add('hidden');
+    videoContainer.classList.remove('hidden');
+}
+
 function removeActiveClass() {
     const activeBtns = document.getElementsByClassName('active');
     for (let activeBtn of activeBtns) {
@@ -60,6 +80,7 @@ const displayVideoDetails = (data) => {
 
 // function for get individual Category video
 function loadByCategori(id) {
+    showLoader()
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
         .then(res => res.json())
         .then((data) => {
@@ -68,7 +89,7 @@ function loadByCategori(id) {
             clickedBtn.classList.add('active')
             displayVideos(data.category)
         })
-        .catch(' tus tus tadawo')
+        .catch(' tus tus tadawo');
 }
 
 function displayCategoris(categoris) {
@@ -85,16 +106,21 @@ function displayCategoris(categoris) {
     }
 }
 
-const loadVideos = () => {
+const loadVideos = (searchBox = "") => {
+    showLoader()
     // fetch api
-    fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
+    const url = `https://openapi.programming-hero.com/api/phero-tube/videos?titile=${searchBox}`
+    console.log(url)
+    fetch(url)
         .then(res => res.json())
         .then((data) => {
+            console.log(data)
             removeActiveClass() // removeclass funtiton call
             document.getElementById('btn-all').classList.add('active') // active class add in defult button
             displayVideos(data.videos) // Call display video function and send data 
         })
         .catch('pechana muje')
+
 }
 
 const displayVideos = (videos) => {
@@ -109,6 +135,7 @@ const displayVideos = (videos) => {
             <h2 class="font-bold text-2xl">Opps !!! Sorry There is no content here</h2>
         </div>
         `;
+        hideLoader();
         return;
     }
 
@@ -132,16 +159,17 @@ const displayVideos = (videos) => {
 </div>
     <div>
         <h2 class="font-bold text-xl text-wrap line-clamp-1 ">${video.title}</h2>
-        <p class="flex items-center gap-2 text-sm text-gray-400">${video.authors[0].profile_name} <img src="https://img.icons8.com/?size=100&id=SRJUuaAShjVD&format=png&color=000000" class="md:w-5 md:h-5 w-3 h-3 " alt=""></p>
+        <p class="flex items-center gap-2 text-sm text-gray-400">${video.authors[0].profile_name} ${video.authors[0].verified == true ? `<img src="https://img.icons8.com/?size=100&id=SRJUuaAShjVD&format=png&color=000000" class="md:w-5 md:h-5 w-3 h-3 " alt="">` : ``}</p>
         <p class="text-sm text-gray-400">${video.others.views} views</p>
     </div>
   </div>
   <button onclick ="videoDetailes('${video.video_id}')" class="btn btn-block">Video Detalis</button>
 </div>
     `;
-    // Append Videocard 
+        // Append Videocard 
         videoContainer.appendChild(videoCard);
     });
+    hideLoader()
 }
-loadVideos()
 loadCategoris()
+searchBar()
