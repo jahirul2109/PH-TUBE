@@ -171,5 +171,5 @@ const displayVideos = (videos) => {
     });
     hideLoader()
 }
+
 loadCategoris()
-searchBar()
