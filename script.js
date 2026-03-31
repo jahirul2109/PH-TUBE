@@ -1,10 +1,3 @@
-const searchBar = () => {
-    document.getElementById('searchBar').addEventListener('keyup', (e) => {
-        const type = e.target.value;
-        console.log(type)
-        loadVideos(type)
-    })
-}
 const showLoader = () => {
     const loaderSpiner = document.getElementById('loaderBar');
     const videoContainer = document.getElementById('videoscontainer');
@@ -106,10 +99,10 @@ function displayCategoris(categoris) {
     }
 }
 
-const loadVideos = (searchBox = "") => {
+function loadVideos  (searchBox = "") {
     showLoader()
     // fetch api
-    const url = `https://openapi.programming-hero.com/api/phero-tube/videos?titile=${searchBox}`
+    const url = `https://openapi.programming-hero.com/api/phero-tube/videos?titile= ${searchBox}`;
     console.log(url)
     fetch(url)
         .then(res => res.json())
@@ -171,5 +164,10 @@ const displayVideos = (videos) => {
     });
     hideLoader()
 }
+    document.getElementById('searchBar').addEventListener('keyup', (e) => {
+        const search = e.target.value;
+        console.log(search)
+        loadVideos(search)
+    })
 
 loadCategoris()
