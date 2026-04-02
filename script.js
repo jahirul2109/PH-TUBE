@@ -103,7 +103,6 @@ function loadVideos  (searchBox ="") {
     showLoader()
     // fetch api
     const url = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchBox}`;
-    console.log(url)
     fetch(url)
         .then(res => res.json())
         .then((data) => {
@@ -125,7 +124,7 @@ const displayVideos = (videos) => {
         videoContainer.innerHTML = `
                 <div id="empty" class="col-span-full flex flex-col justify-center items-center py-10">
             <img class="w-32" src="ph-tube/assets/Icon.png" alt="">
-            <h2 class="font-bold text-2xl">Opps !!! Sorry There is no content here</h2>
+            <h2 class="font-bold text-center text-2xl">Opps !!! Sorry There is no content here</h2>
         </div>
         `;
         hideLoader();
@@ -137,9 +136,9 @@ const displayVideos = (videos) => {
         const videoCard = document.createElement('div');
         // Get Video content 
         videoCard.innerHTML = `
-    <div class="card  md:w-full  flex flex-col  w-11/12 h-[350px] mx-auto shadow-sm">
+    <div class="card  md:w-full  flex flex-col  w-11/12 h-[350px] md:h-[450px] mx-auto shadow-sm">
   <figure class="relative ">
-    <img class = ' md:w-[400px] w-full h-[300px] object-fill '
+    <img class = ' md:w-[400px] lg:w-full lg:h-[330px] w-full h-[200px] object-cover '
       src= ${video.thumbnail}
       alt="Shoes" />
       <span class="absolute right-2 bottom-2 bg-slate-900 text-white p-1 rounded text-sm">3hrs 56 min ago</span>
